@@ -1,0 +1,30 @@
+extends layout
+
+block content
+	h1 #{title} : #{book.title}
+	br
+	if books_instances.length
+	
+		p #[strong Delete the following BookInstances before attempting to delete this book.]
+		
+		div(style='margin-top:20px; margin-right:20px')
+		
+			h4 BookInstances
+			
+			dl
+			each bookinstance in books_instances
+				dt
+					br
+					a(href=bookinstance.url) #{book.title}
+					br
+					p ID: #{bookinstance.id}
+				dd #{book.summary}
+				
+	else
+		p Do you really want to delete this Book?
+		
+		form(method='POST' action='')
+			div.form-group
+				input#bookid.form-control(type='hidden', name='bookid', required='true', value=book._id)
+			button.btn.btn-primary(type='submit') Delete
+	
